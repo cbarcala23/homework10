@@ -3,13 +3,14 @@ const fs = require("fs");
 const generateHTML = require("./generateHTML");
 const util = require("util");
 const writeFileAsync = util.promisify(fs.writeFile);
+// Classes
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
 
-//Questions
+//Questions depending on Role
 const questions = [
 
     {
@@ -78,18 +79,21 @@ function init() {
     inquirer
         .prompt(questions)
         .then(function (input) {
+            // if user selects Manager then use the Manager html
             if (input.title === "Manager") {
                 var object = new Manager(input.name, input.id, input.email, input.officeNumber);
                 var html = managerCard(object);
                 fs.appendFile('./index.html', html, function (err) {
                     if (err) throw err;
                 });
+                // if user selects Engineer then use the Engineer html
             } else if (input.title === "Engineer") {
                 var object = new Engineer(input.name, input.id, input.email, input.github);
                 var html = engineerCard(object);
                 fs.appendFile('./index.html', html, function (err) {
                     if (err) throw err;
                 });
+                // if user selects Intern then use the Intern html
             } else if (input.title === "Intern") {
                 var object = new Intern(input.name, input.id, input.email, input.school);
                 var html = internCard(object);
@@ -104,6 +108,7 @@ function init() {
         })
 };
 
+// html for manager card
 function managerCard(managerObj) {
     var name = managerObj.getName();
     var id = managerObj.getID();
@@ -113,18 +118,17 @@ function managerCard(managerObj) {
 
     var html = `<div class="card">
     <h4 class="card-header" id="name">`+ name + `</h4>
-    <h4 class="card-header" id="name">`+ `<i class="fas fa-gavel"></i>`+`"  "` + role + `</h4>
+    <h4 class="card-header" id="name">`+ `<i class="fas fa-gavel"></i>` + role + `</h4>
     <div class="card-body">
-        <p class="card-text"><b></b><span id="icon"></span> </p>
-        <p class="card-text"><b>ID : `+ id + `</b><span id="temp"></span> </p>
-        <p class="card-text"><b>Email : `+ email + `</b><span id="humidity"></span></p>
-        <p class="card-text"><b>Office # : `+ officeNumber + `</b><span id="uv"> </span></p>
+        <p class="card-text">ID : `+ id + `</p>
+        <p class="card-text">Email : <a href="mailto:`+email+`">`+email+`</a></p>
+        <p class="card-text">Office # : `+ officeNumber + `</p>
     </div>
     </div>`;
-    //console.log("manager"+html);
     return html;
 }
 
+// html for engineer card
 function engineerCard(engineerObj) {
     var name = engineerObj.getName();
     var id = engineerObj.getID();
@@ -134,18 +138,17 @@ function engineerCard(engineerObj) {
 
     var html = `<div class="card">
     <h4 class="card-header" id="name">`+ name + `</h4>
-    <h4 class="card-header" id="name">`+ `<i class="fas fa-wrench"></i>`+`"  "` + role + `</h4>
+    <h4 class="card-header" id="name">`+ `<i class="fas fa-wrench"></i>` + role + `</h4>
     <div class="card-body">
-        <p class="card-text"><b></b><span id="icon"></span> </p>
-        <p class="card-text"><b>ID : `+ id + `</b><span id="temp"></span> </p>
-        <p class="card-text"><b>Email : `+ email + `</b><span id="humidity"></span></p>
-        <p class="card-text"><b>Github : `+ github + `</b><span id="uv"> </span></p>
+        <p class="card-text">ID : `+ id + `</p>
+        <p class="card-text">Email : <a href="mailto:`+email+`">`+email+`</a></p>
+        <p class="card-text">Github : <a href="https://github.com/`+github+`">`+github+`</a></p>
     </div>
     </div>`;
-    //console.log("manager"+html);
     return html;
 }
 
+// html for intern card
 function internCard(internObj) {
     var name = internObj.getName();
     var id = internObj.getID();
@@ -155,15 +158,13 @@ function internCard(internObj) {
 
     var html = `<div class="card">
     <h4 class="card-header" id="name">`+ name + `</h4>
-    <h4 class="card-header" id="name">`+ `<i class="fas fa-user-graduate"></i>`+`"  "` + role + `</h4>
+    <h4 class="card-header" id="name">`+ `<i class="fas fa-user-graduate"></i>` + role + `</h4>
     <div class="card-body">
-        <p class="card-text"><b></b><span id="icon"></span> </p>
-        <p class="card-text"><b>ID : `+ id + `</b><span id="temp"></span> </p>
-        <p class="card-text"><b>Email : `+ email + `</b><span id="humidity"></span></p>
-        <p class="card-text"><b>School : `+ school + `</b><span id="uv"> </span></p>
+        <p class="card-text">ID : `+ id + `</p>
+        <p class="card-text">Email : <a href="mailto:`+email+`">`+ email +`</a></p>
+        <p class="card-text">School : `+ school + `</p>
     </div>
     </div>`;
-    //console.log("manager"+html);
     return html;
 }
 
@@ -173,6 +174,7 @@ function writeToFile() {
     writeFileAsync("index.html", html);
 };
 
-// Start Questions
+// Write the initial HTML document which we will append to
 writeToFile();
+// Start Questions
 init();

@@ -35,7 +35,7 @@ function generateHTML(data) {
     
             .wrapper {
                 background-color: white;
-                padding-top: 100px;
+                padding-top: 50px;
             }
     
             body {
