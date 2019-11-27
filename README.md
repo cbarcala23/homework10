@@ -15,7 +15,6 @@ The user is prompted with options to generate a team by picking a Manager, Engin
 
 # Contact Info
 Christopher Barcala
-chrisbarcala@gmail.com
 github: cbarcala23
 
 # Link to Site
