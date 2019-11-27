@@ -27,5 +27,8 @@ https://cbarcala23.github.io/homework10/
 # Javascript
 "app.js"
 
+# HTML Location
+"output/index.html"
+
 # Screenshots
 ![Screen Shot 2019-11-26 at 12 24 21 AM](https://user-images.githubusercontent.com/54015205/69611699-3afeee80-0fe3-11ea-8006-101057c57585.png)

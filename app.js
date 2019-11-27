@@ -83,21 +83,21 @@ function init() {
             if (input.title === "Manager") {
                 var object = new Manager(input.name, input.id, input.email, input.officeNumber);
                 var html = managerCard(object);
-                fs.appendFile('./index.html', html, function (err) {
+                fs.appendFile('./output/index.html', html, function (err) {
                     if (err) throw err;
                 });
                 // if user selects Engineer then use the Engineer html
             } else if (input.title === "Engineer") {
                 var object = new Engineer(input.name, input.id, input.email, input.github);
                 var html = engineerCard(object);
-                fs.appendFile('./index.html', html, function (err) {
+                fs.appendFile('./output/index.html', html, function (err) {
                     if (err) throw err;
                 });
                 // if user selects Intern then use the Intern html
             } else if (input.title === "Intern") {
                 var object = new Intern(input.name, input.id, input.email, input.school);
                 var html = internCard(object);
-                fs.appendFile('./index.html', html, function (err) {
+                fs.appendFile('./output/index.html', html, function (err) {
                     if (err) throw err;
                 });
             }
@@ -171,7 +171,7 @@ function internCard(internObj) {
 // Writes the initial HTML to the index.html file
 function writeToFile() {
     const html = generateHTML();
-    writeFileAsync("index.html", html);
+    writeFileAsync("./output/index.html", html);
 };
 
 // Write the initial HTML document which we will append to
